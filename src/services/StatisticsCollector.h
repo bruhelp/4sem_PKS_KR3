@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "../result/SimulationResult.h"
+#include "Config.h"
 
 class ElevatorSystem;
 
@@ -16,7 +17,7 @@ public:
 
     SimulationResult collect(
         ElevatorSystem& system,
-        int simulationDuration,
+        const Config& config,
         double executionTime,
         const std::string& algorithmName);
 

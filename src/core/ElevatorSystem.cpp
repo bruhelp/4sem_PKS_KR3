@@ -122,6 +122,20 @@ size_t ElevatorSystem::getPendingCallCount() const
     return callQueue.size();
 }
 
+size_t ElevatorSystem::getWaitingCount(
+    int floor) const
+{
+    auto it =
+        waitingPassengers.find(floor);
+
+    if (it == waitingPassengers.end())
+    {
+        return 0;
+    }
+
+    return it->second.size();
+}
+
 void ElevatorSystem::addPassenger(
     const Passenger &passenger)
 {
@@ -154,12 +168,27 @@ void ElevatorSystem::processBoarding(
 
         elevator.boardPassenger(
             passenger);
+
+        if (logger)
+        {
+            logger->log(
+                "Passenger " + std::to_string(passenger.getId()) + " entered elevator " + std::to_string(elevator.getId()));
+        }
     }
 
     auto completed =
         elevator.unloadPassengers(
             currentSimulationTime);
 
+    for (const auto &passenger : completed)
+    {
+        if (logger)
+        {
+            logger->log(
+                "Passenger " + std::to_string(passenger.getId()) + " arrived at floor " + std::to_string(passenger.getDestinationFloor()));
+        }
+    }
+    
     completedPassengers.insert(
         completedPassengers.end(),
         completed.begin(),

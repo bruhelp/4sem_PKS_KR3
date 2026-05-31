@@ -12,17 +12,16 @@ Elevator::Elevator(
     int id,
     int capacity,
     int travelTimePerFloor,
-    EventLogger* logger)
-    :
-    id(id),
-    currentFloor(1),
-    capacity(capacity),
-    travelTimePerFloor(travelTimePerFloor),
-    direction(Direction::Idle),
-    logger(logger),
-    running(false),
-    doorsOpen(false),
-    movementTime(0)
+    EventLogger *logger)
+    : id(id),
+      currentFloor(1),
+      capacity(capacity),
+      travelTimePerFloor(travelTimePerFloor),
+      direction(Direction::Idle),
+      logger(logger),
+      running(false),
+      doorsOpen(false),
+      movementTime(0)
 {
     state = std::make_unique<IdleState>();
 }
@@ -100,10 +99,7 @@ void Elevator::addDestination(int floor)
     if (logger)
     {
         logger->log(
-            "Elevator "
-            + std::to_string(id)
-            + " received destination "
-            + std::to_string(floor));
+            "Elevator " + std::to_string(id) + " received destination " + std::to_string(floor));
     }
 }
 
@@ -174,10 +170,7 @@ void Elevator::moveOneFloor()
     if (logger)
     {
         logger->log(
-            "Elevator "
-            + std::to_string(id)
-            + " moved to floor "
-            + std::to_string(currentFloor));
+            "Elevator " + std::to_string(id) + " moved to floor " + std::to_string(currentFloor));
     }
 }
 
@@ -213,16 +206,14 @@ void Elevator::handleStop()
     if (logger)
     {
         logger->log(
-            "Elevator "
-            + std::to_string(id)
-            + " opened doors on floor "
-            + std::to_string(currentFloor));
+            "Elevator " + std::to_string(id) + " opened doors on floor " + std::to_string(currentFloor));
     }
 
     unloadPassengers();
 
     std::this_thread::sleep_for(
         std::chrono::milliseconds(1500));
+    serviceTime += 1500;
 
     {
         std::lock_guard<std::mutex> lock(mutex);
@@ -238,20 +229,17 @@ void Elevator::handleStop()
     if (logger)
     {
         logger->log(
-            "Elevator "
-            + std::to_string(id)
-            + " closed doors on floor "
-            + std::to_string(currentFloor));
+            "Elevator " + std::to_string(id) + " closed doors on floor " + std::to_string(currentFloor));
     }
 }
 
 void Elevator::loadPassenger(
-    const Passenger& passenger)
+    const Passenger &passenger)
 {
     std::lock_guard<std::mutex> lock(mutex);
 
     if (static_cast<int>(
-        passengers.size()) >= capacity)
+            passengers.size()) >= capacity)
     {
         return;
     }
@@ -265,11 +253,10 @@ void Elevator::unloadPassengers()
         std::remove_if(
             passengers.begin(),
             passengers.end(),
-            [this](const Passenger& passenger)
+            [this](const Passenger &passenger)
             {
                 return passenger
-                    .getDestinationFloor()
-                    == currentFloor;
+                           .getDestinationFloor() == currentFloor;
             }),
         passengers.end());
 }
@@ -327,10 +314,8 @@ bool Elevator::hasFreeSpace() const
 {
     std::lock_guard<std::mutex> lock(mutex);
 
-    return
-        static_cast<int>(
-            passengers.size())
-        < capacity;
+    return static_cast<int>(
+               passengers.size()) < capacity;
 }
 
 void Elevator::boardPassenger(
@@ -340,9 +325,7 @@ void Elevator::boardPassenger(
 
     if (
         static_cast<int>(
-            passengers.size())
-        >= capacity
-    )
+            passengers.size()) >= capacity)
     {
         return;
     }
@@ -366,22 +349,16 @@ Elevator::unloadPassengers(
         passengers.begin();
 
     while (
-        iterator
-        !=
-        passengers.end()
-    )
+        iterator !=
+        passengers.end())
     {
         if (
             iterator
-                ->
-                getDestinationFloor()
-            ==
-            currentFloor
-        )
+                ->getDestinationFloor() ==
+            currentFloor)
         {
             iterator
-                ->
-                setArrivalTime(
+                ->setArrivalTime(
                     currentSimulationTime);
 
             unloaded.push_back(
@@ -398,4 +375,38 @@ Elevator::unloadPassengers(
     }
 
     return unloaded;
+}
+
+std::vector<int>
+Elevator::getDestinationList() const
+{
+    std::vector<int> result;
+
+    std::queue<int> copy =
+        destinations;
+
+    while (!copy.empty())
+    {
+        result.push_back(
+            copy.front());
+
+        copy.pop();
+    }
+
+    return result;
+}
+
+int Elevator::getCurrentTarget() const
+{
+    if (destinations.empty())
+    {
+        return -1;
+    }
+
+    return destinations.front();
+}
+
+long long Elevator::getServiceTime() const
+{
+    return serviceTime;
 }

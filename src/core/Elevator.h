@@ -52,6 +52,8 @@ private:
 private:
     void processLoop();
 
+    long long serviceTime;
+
 public:
     Elevator(
         int id,
@@ -115,4 +117,11 @@ public:
         int currentSimulationTime);
 
     bool hasFreeSpace() const;
+
+    std::vector<int>
+    getDestinationList() const;
+
+    int getCurrentTarget() const;
+
+    long long getServiceTime() const;
 };

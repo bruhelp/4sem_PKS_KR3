@@ -170,7 +170,7 @@ void Simulation::run()
     SimulationResult result =
         statistics.collect(
             system,
-            config.simulationDuration,
+            config,
             executionTime,
             dispatcher.getStrategyName());
 
@@ -178,7 +178,51 @@ void Simulation::run()
         result);
 
     std::cout
-        << "\nSimulation finished\n";
+        << "\n=========================================\n";
+
+    std::cout
+        << "SIMULATION FINISHED\n";
+
+    std::cout
+        << "\nCONFIGURATION\n";
+
+    std::cout
+        << "Floors: "
+        << result.floors
+        << '\n';
+
+    std::cout
+        << "Elevators: "
+        << result.elevators
+        << '\n';
+
+    std::cout
+        << "Capacity: "
+        << result.capacity
+        << '\n';
+
+    std::cout
+        << "Passengers per floor: "
+        << result.passengersPerFloor
+        << '\n';
+
+    std::cout
+        << "Travel time per floor: "
+        << result.travelTimePerFloor
+        << " ms\n";
+
+    std::cout
+        << "Seed: "
+        << result.seed
+        << '\n';
+
+    std::cout
+        << "Simulation duration: "
+        << result.simulationDuration
+        << " sec\n\n";
+
+    std::cout
+        << "=========================================\n";
 
     std::cout
         << "Algorithm: "
@@ -186,14 +230,47 @@ void Simulation::run()
         << "\n";
 
     std::cout
-        << "Execution time: "
-        << result.executionTime
+        << "Passengers served: "
+        << result.totalPassengers
+        << "\n";
+
+    std::cout
+        << "Average wait time: "
+        << result.averageWaitTime
         << " sec\n";
+
+    std::cout
+        << "Maximum wait time: "
+        << result.maximumWaitTime
+        << " sec\n";
+
+    std::cout
+        << "Average ride time: "
+        << result.averageRideTime
+        << " sec\n";
+
+    std::cout
+        << "Movement time: "
+        << result.totalMovementTime
+        << " ms\n";
+
+    std::cout
+        << "Service time: "
+        << result.totalServiceTime
+        << " ms\n";
 
     std::cout
         << "Utilization: "
         << result.utilization * 100
         << "%\n";
+
+    std::cout
+        << "Execution time: "
+        << result.executionTime
+        << " sec\n";
+
+    std::cout
+        << "=========================================\n";
 
     logger.log(
         "Simulation finished");

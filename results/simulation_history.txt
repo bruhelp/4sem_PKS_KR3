@@ -1,0 +1,36 @@
+==================================
+Run date: Sun May 31 23:34:58 2026
+Algorithm: Nearest Car
+Simulation duration: 30 sec
+Execution time: 34.7038 sec
+Utilization: 50.00%
+Floors: 13
+Elevators: 4
+Capacity: 12
+Passengers per floor: 5
+Travel time per floor: 1500 ms
+Seed: 1
+Passengers: 9
+Average wait time: 1.33
+Maximum wait time: 6.00
+Average ride time: 5.56
+==================================
+
+==================================
+Run date: Sun May 31 23:36:37 2026
+Algorithm: Nearest Car
+Simulation duration: 30 sec
+Execution time: 36.6524 sec
+Utilization: 53.75%
+Floors: 13
+Elevators: 4
+Capacity: 12
+Passengers per floor: 5
+Travel time per floor: 1500 ms
+Seed: 1
+Passengers: 5
+Average wait time: 1.00
+Maximum wait time: 3.00
+Average ride time: 5.00
+==================================
+

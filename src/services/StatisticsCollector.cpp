@@ -1,4 +1,5 @@
 #include "StatisticsCollector.h"
+#include "Config.h"
 
 #include "../core/ElevatorSystem.h"
 #include "../core/Elevator.h"
@@ -6,11 +7,13 @@
 #include <fstream>
 #include <iomanip>
 #include <algorithm>
+#include <filesystem>
+#include <ctime>
 
 SimulationResult
 StatisticsCollector::collect(
     ElevatorSystem &system,
-    int simulationDuration,
+    const Config &config,
     double executionTime,
     const std::string &algorithmName)
 {
@@ -19,8 +22,26 @@ StatisticsCollector::collect(
     result.algorithmName =
         algorithmName;
 
+    result.floors =
+        config.floors;
+
+    result.elevators =
+        config.elevators;
+
+    result.capacity =
+        config.capacity;
+
+    result.passengersPerFloor =
+        config.passengersPerFloor;
+
+    result.travelTimePerFloor =
+        config.travelTimePerFloor;
+
+    result.seed =
+        config.seed;
+
     result.simulationDuration =
-        simulationDuration;
+        config.simulationDuration;
 
     result.executionTime =
         executionTime;
@@ -73,26 +94,32 @@ StatisticsCollector::collect(
 
     long long movementTime = 0;
 
+    long long serviceTime = 0;
+
     for (
-        const auto &
-            elevator :
+        const auto &elevator :
         system.getElevators())
     {
         movementTime +=
-            elevator
-                ->getMovementTime();
+            elevator->getMovementTime();
+
+        serviceTime +=
+            elevator->getServiceTime();
     }
 
-    if (
-        !system.getElevators()
-             .empty())
+    result.totalMovementTime =
+        movementTime;
+
+    result.totalServiceTime =
+        serviceTime;
+
+    if (!system.getElevators().empty())
     {
         result.utilization =
             static_cast<double>(
                 movementTime) /
-            (simulationDuration * 1000.0 *
-             system.getElevators()
-                 .size());
+            (config.simulationDuration * 1000.0 *
+             system.getElevators().size());
     }
 
     results.push_back(
@@ -104,6 +131,9 @@ StatisticsCollector::collect(
 void StatisticsCollector::saveResult(
     const SimulationResult &result)
 {
+    std::filesystem::create_directories(
+        "results");
+
     std::ofstream file(
         "results/simulation_history.txt",
         std::ios::app);
@@ -116,6 +146,13 @@ void StatisticsCollector::saveResult(
     file
         << "==================================\n";
 
+    std::time_t now =
+        std::time(nullptr);
+
+    file
+        << "Run date: "
+        << std::ctime(&now);
+        
     file
         << "Algorithm: "
         << result.algorithmName
@@ -139,6 +176,36 @@ void StatisticsCollector::saveResult(
         << "%\n";
 
     file
+        << "Floors: "
+        << result.floors
+        << "\n";
+
+    file
+        << "Elevators: "
+        << result.elevators
+        << "\n";
+
+    file
+        << "Capacity: "
+        << result.capacity
+        << "\n";
+
+    file
+        << "Passengers per floor: "
+        << result.passengersPerFloor
+        << "\n";
+
+    file
+        << "Travel time per floor: "
+        << result.travelTimePerFloor
+        << " ms\n";
+
+    file
+        << "Seed: "
+        << result.seed
+        << "\n";
+
+    file
         << "Passengers: "
         << result.totalPassengers
         << "\n";
@@ -157,7 +224,7 @@ void StatisticsCollector::saveResult(
         << "Average ride time: "
         << result.averageRideTime
         << "\n";
-        
+
     file
         << "==================================\n\n";
 }

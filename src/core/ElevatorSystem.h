@@ -58,14 +58,17 @@ public:
     void stopElevators();
 
     const std::vector<
-        std::unique_ptr<Elevator>>&
+        std::unique_ptr<Elevator>> &
     getElevators() const;
 
     std::vector<
-        std::unique_ptr<Elevator>>&
+        std::unique_ptr<Elevator>> &
     getElevators();
 
     size_t getPendingCallCount() const;
+
+    size_t getWaitingCount(
+        int floor) const;
 
     void addPassenger(
         const Passenger &passenger);
