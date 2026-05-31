@@ -34,3 +34,147 @@ Maximum wait time: 3.00
 Average ride time: 5.00
 ==================================
 
+==================================
+Run date: Mon Jun 01 01:45:06 2026
+Algorithm: FIFO
+Simulation duration: 0 sec
+Execution time: 0 sec
+Utilization: 0.00%
+Floors: 0
+Elevators: 0
+Capacity: 0
+Passengers per floor: 0
+Travel time per floor: 0 ms
+Seed: 0
+Passengers: 0
+Average wait time: 0.00
+Maximum wait time: 0.00
+Average ride time: 0.00
+==================================
+
+==================================
+Run date: Mon Jun 01 01:45:06 2026
+Algorithm: 
+Simulation duration: 0 sec
+Execution time: 0 sec
+Utilization: 0.00%
+Floors: 0
+Elevators: 0
+Capacity: 0
+Passengers per floor: 0
+Travel time per floor: 0 ms
+Seed: 0
+Passengers: 0
+Average wait time: 0.00
+Maximum wait time: 0.00
+Average ride time: 0.00
+==================================
+
+==================================
+Run date: Mon Jun 01 01:45:06 2026
+Algorithm: 
+Simulation duration: 0 sec
+Execution time: 0 sec
+Utilization: 0.00%
+Floors: 0
+Elevators: 0
+Capacity: 0
+Passengers per floor: 0
+Travel time per floor: 0 ms
+Seed: 0
+Passengers: 0
+Average wait time: 0.00
+Maximum wait time: 0.00
+Average ride time: 0.00
+==================================
+
+==================================
+Run date: Mon Jun 01 01:50:35 2026
+Algorithm: FIFO
+Simulation duration: 0 sec
+Execution time: 0 sec
+Utilization: 0.00%
+Floors: 0
+Elevators: 0
+Capacity: 0
+Passengers per floor: 0
+Travel time per floor: 0 ms
+Seed: 0
+Passengers: 0
+Average wait time: 0.00
+Maximum wait time: 0.00
+Average ride time: 0.00
+==================================
+
+==================================
+Run date: Mon Jun 01 01:50:35 2026
+Algorithm: 
+Simulation duration: 0 sec
+Execution time: 0 sec
+Utilization: 0.00%
+Floors: 0
+Elevators: 0
+Capacity: 0
+Passengers per floor: 0
+Travel time per floor: 0 ms
+Seed: 0
+Passengers: 0
+Average wait time: 0.00
+Maximum wait time: 0.00
+Average ride time: 0.00
+==================================
+
+==================================
+Run date: Mon Jun 01 01:50:35 2026
+Algorithm: 
+Simulation duration: 0 sec
+Execution time: 0 sec
+Utilization: 0.00%
+Floors: 0
+Elevators: 0
+Capacity: 0
+Passengers per floor: 0
+Travel time per floor: 0 ms
+Seed: 0
+Passengers: 0
+Average wait time: 0.00
+Maximum wait time: 0.00
+Average ride time: 0.00
+==================================
+
+==================================
+Run date: Mon Jun 01 01:59:00 2026
+Algorithm: FIFO
+Simulation duration: 0 sec
+Execution time: 0 sec
+Utilization: 0.00%
+Floors: 0
+Elevators: 0
+Capacity: 0
+Passengers per floor: 0
+Travel time per floor: 0 ms
+Seed: 0
+Passengers: 0
+Average wait time: 0.00
+Maximum wait time: 0.00
+Average ride time: 0.00
+==================================
+
+==================================
+Run date: Mon Jun 01 02:01:13 2026
+Algorithm: FIFO
+Simulation duration: 0 sec
+Execution time: 0 sec
+Utilization: 0.00%
+Floors: 0
+Elevators: 0
+Capacity: 0
+Passengers per floor: 0
+Travel time per floor: 0 ms
+Seed: 0
+Passengers: 0
+Average wait time: 0.00
+Maximum wait time: 0.00
+Average ride time: 0.00
+==================================
+
