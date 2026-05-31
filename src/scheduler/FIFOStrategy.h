@@ -1,8 +1,14 @@
 #pragma once
-#include <vector>
-#include "model/Call.h"
 
-class FIFOStrategy {
+#include "IStrategy.h"
+
+class FIFOStrategy : public IStrategy
+{
 public:
-    Call getNext(const std::vector<Call>& calls);
+
+    Elevator* assign(
+        ElevatorSystem& system,
+        const Call& call) override;
+
+    const char* getName() const override;
 };

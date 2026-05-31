@@ -3,19 +3,26 @@ cmake_minimum_required(VERSION 3.10)
 project(ElevatorSimulator)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(ElevatorSimulator
-    src/main.cpp
-    src/simulation/Simulation.cpp
-    src/core/Elevator.cpp
-    src/core/ElevatorSystem.cpp
-    src/model/Call.cpp
-    src/scheduler/FIFOStrategy.cpp
-    src/state/IdleState.cpp
-    src/services/EventLogger.cpp
-    src/result/SimulationResult.cpp
+find_package(Threads REQUIRED)
+
+file(GLOB_RECURSE SOURCES
+    src/*.cpp
 )
+
+add_executable(ElevatorSimulator ${SOURCES})
 
 target_include_directories(ElevatorSimulator PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
+
+target_link_libraries(ElevatorSimulator PRIVATE
+    Threads::Threads
+)
+
+if(WIN32)
+    target_link_libraries(ElevatorSimulator PRIVATE
+        winmm
+    )
+endif()

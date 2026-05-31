@@ -2,8 +2,13 @@
 
 class Elevator;
 
-class IElevatorState {
+class IElevatorState
+{
 public:
-    virtual void handle(Elevator& e) = 0;
+
     virtual ~IElevatorState() = default;
+
+    virtual void handle(Elevator& elevator) = 0;
+
+    virtual const char* getName() const = 0;
 };

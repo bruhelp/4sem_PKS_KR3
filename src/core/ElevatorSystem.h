@@ -1,16 +1,79 @@
 #pragma once
+
 #include <vector>
-#include "core/Elevator.h"
-#include "model/Call.h"
+#include <queue>
+#include <memory>
+#include <mutex>
 
-class ElevatorSystem {
-public:
-    ElevatorSystem(int elevatorsCount, int floors);
+#include "../model/Call.h"
+#include <unordered_map>
+#include "../model/Passenger.h"
 
-    void step();
-    void addCall(const Call& call);
+class Elevator;
 
+class EventLogger;
+
+class CallDispatcher;
+
+class ElevatorSystem
+{
 private:
-    std::vector<Elevator> elevators;
-    std::vector<Call> calls;
+    std::vector<
+        std::unique_ptr<Elevator>>
+        elevators;
+
+    std::queue<Call> callQueue;
+
+    mutable std::mutex queueMutex;
+
+    CallDispatcher *dispatcher;
+
+    EventLogger *logger;
+
+    std::unordered_map<
+        int,
+        std::vector<Passenger>>
+        waitingPassengers;
+
+    std::vector<Passenger>
+        completedPassengers;
+
+public:
+    ElevatorSystem(
+        CallDispatcher *dispatcher,
+        EventLogger *logger);
+
+    ~ElevatorSystem();
+
+    void addElevator(
+        std::unique_ptr<Elevator> elevator);
+
+    void addCall(
+        const Call &call);
+
+    void processCalls();
+
+    void startElevators();
+
+    void stopElevators();
+
+    const std::vector<
+        std::unique_ptr<Elevator>>&
+    getElevators() const;
+
+    std::vector<
+        std::unique_ptr<Elevator>>&
+    getElevators();
+
+    size_t getPendingCallCount() const;
+
+    void addPassenger(
+        const Passenger &passenger);
+
+    void processBoarding(
+        Elevator &elevator,
+        int currentSimulationTime);
+
+    const std::vector<Passenger> &
+    getCompletedPassengers() const;
 };

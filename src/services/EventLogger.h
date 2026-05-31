@@ -1,7 +1,22 @@
 #pragma once
-#include <iostream>
 
-class EventLogger {
+#include <string>
+#include <fstream>
+#include <mutex>
+
+class EventLogger
+{
+private:
+
+    std::ofstream logFile;
+
+    mutable std::mutex mutex;
+
 public:
-    void log(const std::string& msg);
+
+    EventLogger();
+
+    ~EventLogger();
+
+    void log(const std::string& message);
 };
