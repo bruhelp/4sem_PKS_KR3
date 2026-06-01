@@ -32,12 +32,12 @@ int main()
     system.processCalls();
     auto& elev = system.getElevators()[0];
     
-    // Лифт на 1 этаже, садим максимум 2
+    // Лифт на 1 этаже, посадка максимум 2
     system.processBoarding(*elev, 10);
     assert(elev->getPassengerCount() == 2);
     assert(system.getWaitingCount(1) == 1); // один остался
     
-    // Увозим первых двух, высаживаем
+    // Увезти первые два, высаживаем
     while (elev->getCurrentFloor() < 3) elev->moveOneFloor();
     system.processBoarding(*elev, 50);
     assert(elev->getPassengerCount() == 0);

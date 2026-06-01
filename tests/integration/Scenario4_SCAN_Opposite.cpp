@@ -23,7 +23,7 @@ int main()
     auto e1 = make_unique<Elevator>(1, 5, 100, nullptr);
     auto e2 = make_unique<Elevator>(2, 5, 100, nullptr);
 
-    // Поднимаем e1 на 10-й этаж (выше этажа вызова)
+    // e1 на 10-й этаж (выше этажа вызова)
     e1->addDestination(10);
     while (e1->getCurrentFloor() < 10)
         e1->moveOneFloor();

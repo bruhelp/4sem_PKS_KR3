@@ -133,8 +133,8 @@ TEST_F(ElevatorTest, IsOnTargetFloorFalseWhenNoDestinations)
 TEST_F(ElevatorTest, HandleStopOpensClosesDoorsAndUnloadsMatchingPassengers)
 {
     auto *e = createElevator(1, 2, 100);
-    Passenger p1(1, 2, 2, 0); // destination = 2
-    Passenger p2(2, 2, 3, 0); // destination = 3
+    Passenger p1(1, 2, 2, 0);
+    Passenger p2(2, 2, 3, 0);
     e->boardPassenger(p1);
     e->boardPassenger(p2);
     while (e->getCurrentFloor() < 2)
@@ -142,13 +142,12 @@ TEST_F(ElevatorTest, HandleStopOpensClosesDoorsAndUnloadsMatchingPassengers)
     EXPECT_TRUE(e->isOnTargetFloor());
     e->handleStop();
     EXPECT_FALSE(e->isDoorOpen());
-    EXPECT_EQ(1, e->getPassengerCount()); // p2 остался
-    // В очереди остался destination 3
+    EXPECT_EQ(1, e->getPassengerCount()); 
+
     EXPECT_EQ(1, e->getPendingStopsCount());
     EXPECT_EQ(3, e->getCurrentTarget());
 }
 
-// ----- boardPassenger / loadPassenger / hasFreeSpace -----
 TEST_F(ElevatorTest, BoardPassengerAddsToPassengersAndDestination)
 {
     auto *e = createElevator(1, 2, 100);
@@ -170,7 +169,6 @@ TEST_F(ElevatorTest, BoardPassengerRespectsCapacity)
     EXPECT_FALSE(e->hasFreeSpace());
 }
 
-// ----- unloadPassengers (overloaded version with time) -----
 TEST_F(ElevatorTest, UnloadPassengersWithSimulationTimeSetsArrivalTime)
 {
     auto *e = createElevator();
@@ -185,7 +183,6 @@ TEST_F(ElevatorTest, UnloadPassengersWithSimulationTimeSetsArrivalTime)
     EXPECT_EQ(0, e->getPassengerCount());
 }
 
-// ----- getServiceTime -----
 TEST_F(ElevatorTest, ServiceTimeAccumulatesDuringHandleStop)
 {
     auto *e = createElevator(1, 1, 100);

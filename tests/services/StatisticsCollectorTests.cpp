@@ -90,7 +90,7 @@ TEST_F(StatisticsCollectorTest, CollectComputesMaxWaitTime)
     system->processBoarding(*e, 150);
     
     SimulationResult result = stats.collect(*system, config, 1.0, "FIFO");
-    EXPECT_DOUBLE_EQ(50, result.maximumWaitTime); // max(50-0=50, 101-100=1)
+    EXPECT_DOUBLE_EQ(50, result.maximumWaitTime); 
 }
 
 TEST_F(StatisticsCollectorTest, CollectComputesUtilization)
@@ -99,7 +99,7 @@ TEST_F(StatisticsCollectorTest, CollectComputesUtilization)
     auto &e1 = system->getElevators()[0];
     e1->addDestination(3);
     while (e1->getCurrentFloor() < 3)
-        e1->moveOneFloor(); // movement time added
+        e1->moveOneFloor();
     long long movement = e1->getMovementTime();
     SimulationResult result = stats.collect(*system, config, 2.0, "FIFO");
     double expectedUtil = movement / (60.0 * 1000 * 2); // 2 elevators

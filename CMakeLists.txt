@@ -12,7 +12,6 @@ file(GLOB_RECURSE PROJECT_SOURCES
     src/*.cpp
 )
 
-# Убираем main.cpp из библиотеки
 list(REMOVE_ITEM PROJECT_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
 )

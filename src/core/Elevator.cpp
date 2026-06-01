@@ -21,7 +21,8 @@ Elevator::Elevator(
       logger(logger),
       running(false),
       doorsOpen(false),
-      movementTime(0)
+      movementTime(0),
+      serviceTime(0)
 {
     state = std::make_unique<IdleState>();
 }
@@ -405,7 +406,7 @@ int Elevator::getCurrentTarget() const
 
     return destinations.front();
 }
-
+ 
 long long Elevator::getServiceTime() const
 {
     return serviceTime;

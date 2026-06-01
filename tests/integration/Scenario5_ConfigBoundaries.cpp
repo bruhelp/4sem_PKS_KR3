@@ -25,7 +25,7 @@ void runWithConfig(const Config& cfg)
         system.addElevator(make_unique<Elevator>(i, cfg.capacity, cfg.travelTimePerFloor, nullptr));
     system.startElevators();
     
-    // Добавляем одного пассажира для проверки работоспособности
+    // Один пассажира для проверки работоспособности
     Passenger p(1, 1, cfg.floors, 0);
     system.addPassenger(p);
     system.addCall(Call(1, 1, cfg.floors, 0));

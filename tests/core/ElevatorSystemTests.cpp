@@ -61,8 +61,8 @@ TEST_F(ElevatorSystemTest, ProcessCallsAssignsDestinationsToElevator)
     EXPECT_TRUE(elev->hasDestinations());
     auto destList = elev->getDestinationList();
     ASSERT_EQ(2, destList.size());
-    EXPECT_EQ(2, destList[0]); // from floor
-    EXPECT_EQ(5, destList[1]); // to floor
+    EXPECT_EQ(2, destList[0]);
+    EXPECT_EQ(5, destList[1]);
     system->stopElevators();
 }
 
@@ -79,7 +79,7 @@ TEST_F(ElevatorSystemTest, ProcessBoardingLoadsWaitingPassengers)
 {
     system->addElevator(std::make_unique<Elevator>(1, 2, 100, nullptr));
     auto& elev = system->getElevators()[0];
-    // add waiting passenger on floor 1
+
     Passenger p(99, 1, 4, 0);
     system->addPassenger(p);
     // elevator starts at floor 1
@@ -92,9 +92,9 @@ TEST_F(ElevatorSystemTest, ProcessBoardingUnloadsAtDestination)
 {
     system->addElevator(std::make_unique<Elevator>(1, 2, 100, nullptr));
     auto& elev = system->getElevators()[0];
-    Passenger p(88, 1, 1, 0); // start and dest same floor
+    Passenger p(88, 1, 1, 0);
     elev->boardPassenger(p);
-    // move to floor 1 (already there)
+
     system->processBoarding(*elev, 200);
     const auto& completed = system->getCompletedPassengers();
     ASSERT_EQ(1, completed.size());

@@ -47,19 +47,19 @@ TEST_F(SCANStrategyTest, AssignsElevatorMovingInSameDirectionAndAhead)
 {
     auto e1 = std::make_unique<Elevator>(1, 5, 100, nullptr);
     auto e2 = std::make_unique<Elevator>(2, 5, 100, nullptr);
-    // move e1 to floor 2, direction Up
+
     e1->addDestination(3);
     while (e1->getCurrentFloor() < 2)
         e1->moveOneFloor();
-    // e2 at floor 4, direction Down (add lower dest)
+
     e2->addDestination(1);
     while (e2->getCurrentFloor() > 4)
         e2->moveOneFloor();
     system->addElevator(std::move(e1));
     system->addElevator(std::move(e2));
-    Call call(1, 3, 5, 0); // from floor 3, direction Up needed
+    Call call(1, 3, 5, 0); 
     Elevator *chosen = strategy->assign(*system, call);
-    EXPECT_EQ(1, chosen->getId()); // e1 moving Up and can serve floor 3
+    EXPECT_EQ(1, chosen->getId()); 
 }
 
 TEST_F(SCANStrategyTest, PrefersClosestCompatibleElevator)
@@ -68,15 +68,15 @@ TEST_F(SCANStrategyTest, PrefersClosestCompatibleElevator)
     auto e2 = std::make_unique<Elevator>(2, 5, 100, nullptr);
     e1->addDestination(6);
     while (e1->getCurrentFloor() < 4)
-        e1->moveOneFloor(); // at floor 4, going Up
+        e1->moveOneFloor(); 
     e2->addDestination(2);
     while (e2->getCurrentFloor() > 6)
-        e2->moveOneFloor(); // at floor 6, going Down
+        e2->moveOneFloor(); 
     system->addElevator(std::move(e1));
     system->addElevator(std::move(e2));
-    Call call(1, 5, 7, 0); // from floor 5, Up direction
+    Call call(1, 5, 7, 0);
     Elevator *chosen = strategy->assign(*system, call);
-    EXPECT_EQ(1, chosen->getId()); // distance 1 vs e2 distance 1 but e2 moving Down incompatible
+    EXPECT_EQ(1, chosen->getId()); 
 }
 
 TEST_F(SCANStrategyTest, FallbackToFirstElevatorIfNoneCompatible)
@@ -86,14 +86,14 @@ TEST_F(SCANStrategyTest, FallbackToFirstElevatorIfNoneCompatible)
     e1->addDestination(1); // moving Down
     while (e1->getCurrentFloor() > 3)
         e1->moveOneFloor();
-    e2->addDestination(10); // moving Up
+    e2->addDestination(10);
     while (e2->getCurrentFloor() < 8)
         e2->moveOneFloor();
     system->addElevator(std::move(e1));
     system->addElevator(std::move(e2));
-    Call call(1, 5, 6, 0); // both incompatible (e1 Down, e2 Up but call floor 5 is behind e2)
+    Call call(1, 5, 6, 0); 
     Elevator *chosen = strategy->assign(*system, call);
-    EXPECT_NE(nullptr, chosen); // fallback to first (e1)
+    EXPECT_NE(nullptr, chosen); 
 }
 
 TEST_F(SCANStrategyTest, NameReturnsSCAN)

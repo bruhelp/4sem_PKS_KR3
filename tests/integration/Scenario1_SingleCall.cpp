@@ -32,7 +32,7 @@ int main()
     
     auto& elev = system.getElevators()[0];
     
-    // Симулируем движение
+    // Симуляция движения
     while (elev->getCurrentFloor() < 1) elev->moveOneFloor(); // уже на 1
     system.processBoarding(*elev, 0);   // посадка
     
