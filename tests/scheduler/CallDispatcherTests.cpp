@@ -74,7 +74,7 @@ TEST(CallDispatcherTest, DispatchReturnsElevatorWithStrategy)
         5,
         0);
 
-    Elevator* result =
+    Elevator *result =
         dispatcher.dispatchCall(
             system,
             call);
