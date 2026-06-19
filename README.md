@@ -467,6 +467,16 @@ EventLoggerTests (6 тестов):
 ```
 
 ### Как запустить сценарии? 
+Например:
 ```
 .\build\tests\Scenario1.exe  
+```
+
+## Запуск через Docker
+```
+docker build -t elevator-simulator .
+```
+С параметрами:
+```
+docker run --rm elevator-simulator 10 3 6 5 10 
 ```
